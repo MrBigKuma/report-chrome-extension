@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Lite Report Extension",
+  "description": "This extension that save your todo list and export to backlog",
+  "version": "1.0",
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://ajax.googleapis.com/"
+  ],
+  "chrome_url_overrides" : {
+    "newtab": "newtab.html"
+  }
+}

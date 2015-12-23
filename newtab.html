@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <title>Daily report</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="main row">
+        <div class="col col-md-4 col-md-offset-4">
+            <b><p id="text-time"></p></b>
+
+            <p id="text-hello" class="text-white glow">Hello, Huy</p>
+
+            <h2 class="glow">Your today's tasks:</h2>
+
+            <div id="task-list"></div>
+
+            <div id="div-new-task">
+                <input id="input-new-task" type="text" class="text-black form-control" placeholder="new task...">
+                <br>
+            </div>
+            <button id="btn-new" class="btn btn-link text-white">+ New task</button>
+        </div>
+    </div>
+</div>
+
+<!--Report panel-->
+<div id="report-panel" class="report panel panel-default">
+    <div class="panel-heading">
+        <b>Report</b>
+    </div>
+    <div class="panel-body">
+        <p><label for="report-date">Report date</label><input id="report-date" type="date" class="form-control"></p>
+        <ul id="selected-history"></ul>
+        <button id="btn-report-backlog" class="btn btn-success btn-sm">Report to Backlog</button>
+        <button id="btn-report-lite-report" class="btn btn-primary btn-sm pull-right">Report to LiteReport</button>
+    </div>
+    <ul id="history-task-list" class="list-group"></ul>
+</div>
+<button id="btn-report-panel" class="btn btn-link text-white">
+    <b>Report</b>
+</button>
+
+<!--Setting button-->
+<div id="setting-panel" class="setting panel panel-default">
+    <div class="panel-body">
+        <p><label for="report-date">Backlog Api Key</label><input id="input-api-key" type="text" class="form-control">
+        </p>
+    </div>
+</div>
+<button id="btn-setting" class="btn btn-link text-white">
+    <b><span class="glyphicon glyphicon-cog"></span> Setting</b>
+</button>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
