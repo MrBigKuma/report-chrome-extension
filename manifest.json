@@ -8,9 +8,14 @@
   "permissions": [
     "activeTab",
     "storage",
+    "idle",
     "https://ajax.googleapis.com/"
   ],
   "chrome_url_overrides" : {
     "newtab": "newtab.html"
+  },
+  "background": {
+    "scripts": ["js/eventPage.js"],
+    "persistent": false
   }
 }

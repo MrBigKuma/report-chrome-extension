@@ -4,6 +4,7 @@
 const DB_TASK = "task";
 const DB_HISTORY = "history";
 const DB_BACKLOG_API_KEY = "backlogKey";
+const DB_IDLE_STATE = "idleState";
 
 var tasks = [];
 var historyTasks = [];
@@ -61,7 +62,9 @@ $(document).ready(function () {
     });
 
     // Get data from storage
-    chrome.storage.sync.get([DB_TASK, DB_HISTORY, DB_BACKLOG_API_KEY], function (obj) {
+    var d = new Date();
+    var currentDbIdleState = DB_IDLE_STATE+"_"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+    chrome.storage.sync.get([DB_TASK, DB_HISTORY, DB_BACKLOG_API_KEY, currentDbIdleState], function (obj) {
       console.log(obj);
       var objTask = obj[DB_TASK];
       tasks = objTask !== undefined ? objTask.tasks !== undefined ? objTask.tasks : [] : [];
@@ -105,7 +108,19 @@ $(document).ready(function () {
 
     setTextTime();
 
-    document.getElementById("report-date").valueAsDate = new Date()
+    $("#report-date").change(function(){
+      var reportDate = $("#report-date").val();
+      var d = new Date(reportDate);
+      setWorkingTime(d);
+    });
+    setWorkingTime(d); // Initial
+
+    document.getElementById("report-date").valueAsDate = new Date();
+
+    chrome.idle.onStateChanged.addListener(function(newState){
+      console.log("IdleState", newState);
+      //saveState(newState);
+    });
   }
 );
 
@@ -120,8 +135,8 @@ function uiAddTask(task, i) {
   var checked = task.complete ? "checked" : "";
 
   var item = i === 0 ?
-  '<h1 class="task-item glow ' + completeClass + '"><input id="task' + i + '" type="checkbox" ' + checked + '/> ' + task.name + genBtnRemove(i) + '</h1>' :
-  '<p class="task-item glow ' + completeClass + '"><input id="task' + i + '" type="checkbox" ' + checked + '/> ' + task.name + genBtnRemove(i) + '</p>';
+  '<h2 class="text-center col col-md-6 col-md-offset-3 task-item glow ' + completeClass + '"><input id="task' + i + '" type="checkbox" ' + checked + '/> ' + task.name + genBtnRemove(i) + '</h2>' :
+  '<p class="col col-md-4 col-md-offset-4 task-item glow ' + completeClass + '"><input id="task' + i + '" type="checkbox" ' + checked + '/> ' + task.name + genBtnRemove(i) + '</p>';
   $("#task-list").append(item);
 
   // On check box click
@@ -172,7 +187,6 @@ function saveHistory(tasks) {
     console.log('Settings saved');
   });
 }
-
 
 function genBtnRemove(i) {
   return '<button id="btn-rm' + i + '" type="button" class="btn btn-sm btn-default btn-rm" aria-label="Left Align"> ' +
@@ -229,6 +243,26 @@ function setTextTime(){
   var minutes = date.getMinutes();
   minutes = minutes <10?"0"+minutes:minutes;
   $("#text-time").html(hours+":"+ minutes);
+}
+
+function setWorkingTime(d){
+  var currentDbIdleState = DB_IDLE_STATE + "_" + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  chrome.storage.sync.get(currentDbIdleState, function (obj) {
+    console.log(obj, currentDbIdleState);
+    var objIdleStates = obj[currentDbIdleState];
+    var idleStates = objIdleStates !== undefined ? objIdleStates : {};
+    if (idleStates.firstActive!== undefined){
+      var dateStart = new Date(idleStates.firstActive);
+      $("#work-start").html(dateStart.getHours()+":"+dateStart.getMinutes());
+    }
+
+    if (idleStates.lastActive!== undefined){
+      var dateEnd = new Date(idleStates.lastActive);
+      $("#work-end").html(dateEnd.getHours()+":"+dateEnd.getMinutes());
+    }
+
+  });
+
 }
 
 /*----------------Backlog-------------------*/

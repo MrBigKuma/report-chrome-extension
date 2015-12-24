@@ -4,7 +4,7 @@ body {
 }
 
 .main{
-    margin-top: 100px;
+    margin-top: 80px;
     color: white;
 }
 
@@ -32,7 +32,7 @@ body {
     border: 0;
     background-color: transparent;
     color: white;
-    display: none;
+    visibility: hidden;
     padding: 0;
     margin: 0 10px;
 }
@@ -52,7 +52,15 @@ body {
 }
 
 .task-item:hover button{
-    display: inline-block;
+    visibility: visible;
+}
+
+.task-item input{
+  visibility: hidden;
+}
+
+.task-item:hover input{
+  visibility: visible;
 }
 
 .report{
@@ -95,9 +103,13 @@ body {
 
 #text-hello{
     text-align: center;
-    font-size: 48px;
+    font-size: 32px;
 }
 
 .glow{
     text-shadow: 0 0 5px rgba(255,255,255,1) ;
+}
+
+.text-center{
+  text-align: center;
 }

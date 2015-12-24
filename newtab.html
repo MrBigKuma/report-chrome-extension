@@ -12,12 +12,14 @@
         <div class="col col-md-4 col-md-offset-4">
             <b><p id="text-time"></p></b>
 
-            <p id="text-hello" class="text-white glow">Hello, Huy</p>
+            <p id="text-hello" class="text-white glow">Hello, Nam</p>
 
-            <h2 class="glow">Your today's tasks:</h2>
+            <h4 class="glow">Your today's tasks:</h4>
+        </div>
 
-            <div id="task-list"></div>
+        <div id="task-list"></div>
 
+        <div class="col col-md-4 col-md-offset-4">
             <div id="div-new-task">
                 <input id="input-new-task" type="text" class="text-black form-control" placeholder="new task...">
                 <br>
@@ -34,6 +36,8 @@
     </div>
     <div class="panel-body">
         <p><label for="report-date">Report date</label><input id="report-date" type="date" class="form-control"></p>
+
+        <p><b>Working time</b> <span id="work-start"></span> - <span id="work-end"></span></p>
         <ul id="selected-history"></ul>
         <button id="btn-report-backlog" class="btn btn-success btn-sm">Report to Backlog</button>
         <button id="btn-report-lite-report" class="btn btn-primary btn-sm pull-right">Report to LiteReport</button>
