@@ -95,6 +95,8 @@ $(document).ready(function () {
       renderSetting(backlogApiKey);
 
       renderLiteReportSetting(token, email);
+
+      renderHelloText(email);
     });
 
     $("#input-api-key").keydown(function (e) {
@@ -140,6 +142,14 @@ function renderTasks(tasks) {
   tasks.forEach(function (task, i) {
     uiAddTask(task, i);
   });
+}
+
+function renderHelloText(email){
+  if (email != undefined){
+    $("#text-hello").html("Hello, "+email.split('@')[0]);
+  } else {
+    $("#text-hello").html("");
+  }
 }
 
 function uiAddTask(task, i) {
@@ -337,6 +347,7 @@ function login() {
       email = data['email'];
       saveLiteReport(token, cardId, email);
       renderLiteReportSetting(token, email);
+      renderHelloText(email);
     });
 }
 
@@ -346,6 +357,7 @@ function logout() {
   email = undefined;
   clearLiteReport();
   renderLiteReportSetting(token, email);
+  renderHelloText(email);
 }
 
 function reportToLiteReport() {
