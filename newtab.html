@@ -31,9 +31,6 @@
 
 <!--Report panel-->
 <div id="report-panel" class="report panel panel-default">
-    <div class="panel-heading">
-        <b>Report</b>
-    </div>
     <div class="panel-body">
         <p><label for="report-date">Report date</label><input id="report-date" type="date" class="form-control"></p>
 
@@ -51,7 +48,18 @@
 <!--Setting button-->
 <div id="setting-panel" class="setting panel panel-default">
     <div class="panel-body">
-        <p><label for="report-date">Backlog Api Key</label><input id="input-api-key" type="text" class="form-control">
+        <p id="login-form">
+            <b>Lite report</b>
+            <input id="email" type="text" class="form-control" placeholder="Email">
+            <input id="password" type="text" class="form-control" placeholder="Password">
+            <button id="btn-login" class="btn btn-primary">login</button>
+        </p>
+        <p id="lite-report">
+            <b>Lite report</b><br>
+            <b>Email</b> <span id="text-email"></span>
+            <button id="btn-logout" class="btn btn-default btn-sm">Logout</button>
+        </p>
+        <p><label for="input-api-key">Backlog Api Key</label><input id="input-api-key" type="text" class="form-control">
         </p>
     </div>
 </div>
